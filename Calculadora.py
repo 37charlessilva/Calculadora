@@ -18,7 +18,8 @@ def calculo(n):
         conteudo.set(str(n))
 
     else:
-        conteudo.set(conteudo.get() + str(n))
+        if len(conteudo.get()) < 28:
+            conteudo.set(conteudo.get() + str(n))
 
 
 """Onde vai ficar os números e resultados"""
@@ -28,16 +29,17 @@ conteudo.set("0")
 
 """Aprender sobre os espaços da label para definir um tamanho de pelomenos alguns números"""
 """Criar um git pra esse projeto"""
-entrada = Label(janela, textvariable=conteudo)
-entrada.grid(column=2, ipadx=30, row=0)
+""", anchor=E"""
+entrada = Label(janela, textvariable=conteudo, relief="solid")
+entrada.grid(row=0, ipadx=30, columnspan=3, sticky=E)
 
-botao0 = Button(janela, text="7", command=lambda: calculo(7))
+botao0 = Button(janela, text="7", command=lambda: calculo("7"))
 botao0.grid(column=0, ipadx=30, row=1)
 
 botao1 = Button(janela, text="8", command=lambda: calculo("8"))
 botao1.grid(column=1, ipadx=30, row=1)
 
-botao2 = Button(janela, text="9", command=lambda: calculo("9"))
+botao2 = Button(janela, text="9", command=lambda: calculo("9"), width=0)
 botao2.grid(column=2, ipadx=30, row=1)
 
 botao3 = Button(janela, text="4", command=lambda: calculo("4"))
