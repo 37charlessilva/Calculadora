@@ -1,38 +1,58 @@
-from tkinter import *
+from dataclasses import field
 
-buttonList = [
-    ["(", ")", "%", "C"],
-    ["7", "8", "9", "/"],
-    ["4", "5", "6", "*"],
-    ["1", "2", "3", "-"],
-    ["0", ".", "=", "+"],
-]
+import flet as ft
 
-def clique(v, conteudo, historico):
-    # Escreve os números na label
-    atual = conteudo.get()
+class MyButton(ft.Button):
 
-    if v == "C":
-        conteudo.set("0")
+    def __init__(self, text: str, on_click, bgcolor: str, color: str):
+        super().__init__(
+            text,
+            on_click = on_click,
+            bgcolor = bgcolor,
+            color = color,
+        )
+        
+        self.expand = 1
+        
 
-    elif v == "=":
-        resultado = eval(atual)
-        historico.set(f"{atual} = {resultado}")
-        conteudo.set(resultado)
+class DigitButton(MyButton):
+    def __init__(self, text: str, result):
+        self.text = text 
 
-    else:
-        if atual == "0":
-            atual = ""
-        if len(atual) < 28:
-            conteudo.set(atual + v)
+        super().__init__(
+            text=text, 
+            bgcolor=ft.Colors.WHITE_24, 
+            on_click=lambda e: self.clickDigit(e, result),
+            color=ft.Colors.WHITE
+        )
+
+        if text == "0":
+            self.expand = 2
+        
+    def clickDigit(self, e, result):
+        if result.value == "0":
+            result.value = self.text
+        else:
+            result.value += self.text
+
+        e.page.update()
 
 
+class ActionButton(MyButton):
+    def __init__(self, text: str, on_click):
+        super().__init__(
+            text=text, 
+            on_click=on_click, 
+            bgcolor=ft.Colors.ORANGE, 
+            color=ft.Colors.WHITE
+        )
 
-def buttons(janela, conteudo, historico):
-    for row, line in enumerate(buttonList, start=2):
-        for column, valor in enumerate(line): 
-            Button(janela, text=valor, font=("Arial", 14, "bold"), bg="#2d2d2d", 
-                   fg="white",  activebackground="#3d3d3d", bd=0,
-                   width=2, height=1,
-                   command=lambda v = valor: clique(v, conteudo, historico)).grid(
-                column=column, ipadx=30, row=row, padx=0.5, pady=1, sticky="nsew")
+
+class ExtraActionButton(MyButton):
+    def __init__(self, text: str, on_click):
+        super().__init__(
+            text=text, 
+            on_click=on_click, 
+            bgcolor=ft.Colors.BLUE_GREY_100, 
+            color=ft.Colors.BLACK
+        )
