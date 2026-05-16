@@ -28,8 +28,11 @@ def clique(v, conteudo, historico):
 
 
 
-def buttons(janela, conteudo):
+def buttons(janela, conteudo, historico):
     for row, line in enumerate(buttonList, start=2):
         for column, valor in enumerate(line): 
-            Button(janela, text=valor, command=lambda v = valor: clique(v, conteudo, conteudo)).grid(
-                column=column, ipadx=30, row=row, padx=1, pady=1)
+            Button(janela, text=valor, font=("Arial", 14, "bold"), bg="#2d2d2d", 
+                   fg="white",  activebackground="#3d3d3d", bd=0,
+                   width=2, height=1,
+                   command=lambda v = valor: clique(v, conteudo, historico)).grid(
+                column=column, ipadx=30, row=row, padx=0.5, pady=1, sticky="nsew")
