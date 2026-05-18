@@ -6,16 +6,6 @@ import flet as ft
 def main(page: ft.Page):
     page.title = "Calculadora"
     result = ft.Text(value="0", color=ft.Colors.WHITE, size=20)
-    
-
-    def clickDigit(e):
-        if result.value == "0":
-            result.value = e.control.content
-        
-        else:
-            result.value += e.control.content
-
-        e.page.update()
 
     page.add(
         ft.Container(
@@ -23,38 +13,38 @@ def main(page: ft.Page):
                 controls=[
                     ft.Row(controls=[result], alignment=ft.MainAxisAlignment.END),
                     ft.Row(controls=[
-                        ExtraActionButton(text="AC", on_click=clickDigit),
-                        ExtraActionButton(text="+/-", on_click=clickDigit),
-                        ExtraActionButton(text="%", on_click=clickDigit),
-                        ActionButton(text="/", on_click=clickDigit),
-                        ]
+                        ExtraActionButton(text="AC", result=result), 
+                        ExtraActionButton(text="^", result=result),
+                        ExtraActionButton(text="%", result=result),
+                        ActionButton(text="/", result=result),
+                        ]  
                     ),
                     ft.Row(controls=[
-                        DigitButton(text="7", result=result),
+                        DigitButton(text="7", result=result), 
                         DigitButton(text="8", result=result),
-                        DigitButton(text="9", result=result),
-                        ActionButton(text="*", on_click=clickDigit),
+                        DigitButton(text="9", result=result), 
+                        ActionButton(text="*", result=result),
                         ]
                     ),
                     ft.Row(controls=[
                         DigitButton(text="4", result=result),
                         DigitButton(text="5", result=result),
                         DigitButton(text="6", result=result),
-                        ActionButton(text="-", on_click=clickDigit),
+                        ActionButton(text="-", result=result),
                         ]
                     ),
                     ft.Row(controls=[
                         DigitButton(text="1", result=result),
                         DigitButton(text="2", result=result),
                         DigitButton(text="3", result=result),
-                        ActionButton(text="+", on_click=clickDigit),
+                        ActionButton(text="+", result=result),
                         ]
                     ),
                     ft.Row(controls=[
-                        DigitButton(text="4", result=result),
-                        DigitButton(text="5", result=result),
-                        DigitButton(text="6", result=result),
-                        ActionButton(text="-", on_click=clickDigit),
+                        DigitButton(text="0", result=result),
+                        DigitButton(text=".", result=result),
+                        ActionButton(text="⬅️", result=result), 
+                        ActionButton(text="=", result=result), 
                         ]
                     ),
                 ],
